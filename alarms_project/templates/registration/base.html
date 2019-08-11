@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Alarmous | Login</title>
+    {% load staticfiles %} {% load bootstrap4 %} {% bootstrap_css %} {% bootstrap_javascript jquery='full' %}
+</head>
+
+<body>
+    <div class="container" style="padding-top: 10vh;">
+        <div class="row">
+            <div class="card col-10 offset-1 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-sm-10 offset-sm-1">
+                <div class="card-body">{% block content %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% block title %}
+    <title>Alarmous | Homepage</title>{% endblock %} {% load staticfiles %} {% load bootstrap4 %} {% bootstrap_css %} {% bootstrap_javascript jquery='full' %}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" type="text/css" media="all" rel="stylesheet">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="//cdn.rawgit.com/monim67/django-bootstrap-datepicker-plus/master/bootstrap_datepicker_plus/static/bootstrap_datepicker_plus/js/datepicker-widget.js"></script>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/datetimepicker.css' %}">
+    <script type="text/javascript" src="{% static 'js/time.js' %}"></script>
+</head>
+
+<body>
+    <div class="container-fluid mx-auto">
+        {% if user.is_authenticated %} {% block sidebar %}
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="/">Alarmous</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'alarm_create' %}">Add Alarm</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-sm-0">
+                    <li class="nav-item">
+                        <a href="{% url 'profile' pk=user.id %}" class="nav-link">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        {% endblock %}
+        <div class="col mx-auto">
+            {% block content %}{% endblock %}
+        </div>
+        {% else %}
+        <center style="padding-top: 30vh;">
+            <h1>You are not authorized to view this page</h1>
+            <p class="py-2">Use this <a href="{% url 'login' %}">link</a> to log in, or this <a href="{% url 'signup' %}">link</a> to make a new account</p>
+        </center>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

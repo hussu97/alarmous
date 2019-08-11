@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+<center>
+    <p>Welcome to Alarmous {{user.first_name}} {{user.last_name}}, Your one stop shop to all things alarms related</p>
+    <h1>Current time is</h1>
+    <h1 id="time"></h1>
+
+    {% for alarm in alarm_list %}
+    <div class="card col-lg-3 col-sm-6">
+        <div class="card-body">
+            <h5 class="card-title">{{alarm.title}}</h5>
+            <p class="card-text">{{alarm.time}}</p>
+            <div class="row">
+                <div class="col-6">
+                    <a href="{% url 'alarm_update' pk=alarm.id %}" class="btn btn-success">Edit</a>
+                </div>
+                <div class="col-6">
+                    <a href="{% url 'alarm_delete' pk=alarm.id %}" class="btn btn-danger">Dismiss</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</center>
+{% endblock %}
