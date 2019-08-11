@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% block title %}
-    <title>Alarmous | Homepage</title>{% endblock %} {% load staticfiles %} {% load bootstrap4 %} {% bootstrap_css %} {% bootstrap_javascript jquery='full' %}
+    <title>Alarmous | Homepage</title>{% endblock %} {% load static %} {% load bootstrap4 %} {% bootstrap_css %} {% bootstrap_javascript jquery='full' %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.css" type="text/css" media="all" rel="stylesheet">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
     <script type="text/javascript" src="//cdn.rawgit.com/monim67/django-bootstrap-datepicker-plus/master/bootstrap_datepicker_plus/static/bootstrap_datepicker_plus/js/datepicker-widget.js"></script>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-    <link rel="stylesheet" href="{% static 'css/datetimepicker.css' %}">
-    <script type="text/javascript" src="{% static 'js/time.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'alarms/css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'alarms/css/datetimepicker.css' %}">
+    <script type="text/javascript" src="{% static 'alarms/js/time.js' %}"></script>
 </head>
 
 <body>
@@ -57,5 +57,3 @@
     </div>
 
 </body>
-
-</html>

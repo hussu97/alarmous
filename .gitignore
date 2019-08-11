@@ -2,7 +2,7 @@
 .DS_Store
 .AppleDouble
 .LSOverride
-
+.vscode/
 # Icon must end with two \r
 Icon
 
@@ -83,8 +83,13 @@ target/
 __pycache__/
 */__pycache__/
 local_settings.py
-
+hussuenv/*
 .env
 db.sqlite3
 
 secretkey.txt
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+static/*

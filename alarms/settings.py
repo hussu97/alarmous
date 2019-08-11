@@ -22,13 +22,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 print(BASE_DIR)
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open(f'{BASE_DIR}\\secretkey.txt') as f:
-    SECRET_KEY = f.read().strip()
+try:
+    SECRET_KEY = os.environ['secret']
+except KeyError:
+    with open(f'{BASE_DIR}\\secretkey.txt') as f:
+            SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+try:
+    ALLOWED_HOSTS = [os.environ['host_domain']]
+except KeyError:
+    ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -139,6 +145,6 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR,"static")
 STATIC_URL = '/static/'
 
