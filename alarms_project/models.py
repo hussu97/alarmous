@@ -5,7 +5,7 @@ import datetime
 # Create your models here.
 class Alarm(models.Model):
     """Model representing an alarm"""
-    title = models.CharField(max_length=200, null=True, blank=True)
+    title = models.CharField(max_length=200)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     sound = models.ForeignKey('Sound', on_delete=models.CASCADE, default=1)
     time = models.DateTimeField()

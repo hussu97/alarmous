@@ -1,1 +1,4 @@
-#time {}
+@import url('https://fonts.googleapis.com/css?family=Raleway:300,400,700,900&display=swap');
+body {
+    font-family: 'Raleway', sans-serif !important;
+}

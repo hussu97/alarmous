@@ -31,7 +31,7 @@ class HomePageView(LoginRequiredMixin,ListView):
     redirect_field_name = 'redirect_to'
     model = Alarm
     context_object_name = 'alarm_list'
-    paginate_by = 10
+    paginate_by = 6
     template_name = 'home.html'
 
     def get_queryset(self):

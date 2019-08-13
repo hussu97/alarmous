@@ -6,7 +6,14 @@
         <h1>{{title}}</h1>
         <form action="" method="post">
             {% csrf_token %} {{ form|crispy }}
-            <input class="btn btn-success" type="submit" value="Update Profile">
+            <div class="row">
+                <div class="col-6">
+                    <input class="btn btn-success" type="submit" value={{ title }}>
+                </div>
+                <div class="col-6">
+                    <a href="{% url 'home' %}" class="btn btn-secondary float-right">Back</a>
+                </div>
+            </div>
         </form>
     </div>
 </div>
