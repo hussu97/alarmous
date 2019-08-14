@@ -1,4 +1,4 @@
-{% extends "registration/base.html" %}
+{% extends "registration/base.html" %}{% block content %}
 <h2>Log In</h2>
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %} {% load crispy_forms_tags %} {{ form|crispy }}

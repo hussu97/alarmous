@@ -29,7 +29,7 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 class LandingPageView(TemplateView):
-    template_name = 'lannding.html'
+    template_name = 'landing.html'
 
 class HomePageView(LoginRequiredMixin,ListView):
     login_url = '/account/login'
