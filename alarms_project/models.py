@@ -1,9 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
-import datetime
+from rules.contrib.models import RulesModel
+import rules
 
+@rules.predicate
+def is_alarm_creator(user, alarm):
+    return alarm.creator == user
+rules.add_rule('can_edit_alarm',is_alarm_creator)
+rules.add_perm('alarm.edit_alarm', is_alarm_creator)
 # Create your models here.
-class Alarm(models.Model):
+class Alarm(RulesModel):
     """Model representing an alarm"""
     title = models.CharField(max_length=200, default = 'Alarm', help_text = 'Enter a nice name for the alarm')
     creator = models.ForeignKey(User, on_delete=models.CASCADE, default=1)

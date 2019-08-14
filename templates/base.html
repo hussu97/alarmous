@@ -10,12 +10,13 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.min.js"></script>
     <link rel="stylesheet" href="{% static 'alarms/css/styles.css' %}">
     <link rel="stylesheet" href="{% static 'alarms/css/datetimepicker.css' %}">
+
 </head>
 
 <body>
     <div class="container-fluid mx-auto">
         {% if user.is_authenticated %} {% block sidebar %}
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
             <a class="navbar-brand" href="{% url 'home' %}">Alarmous</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

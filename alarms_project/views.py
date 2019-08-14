@@ -10,6 +10,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
+from rules.contrib.views import PermissionRequiredMixin
 
 # Create your views here.
 def signup(request):
@@ -23,7 +24,7 @@ def signup(request):
             my_group = Group.objects.get(name='AlarmGroup') 
             my_group.user_set.add(user)
             login(request, user)
-            return redirect('/')
+            return redirect('/alarms/alarm')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -47,6 +48,7 @@ class AlarmCreate(LoginRequiredMixin,CreateView):
     redirect_field_name = 'redirect_to'
     model = Alarm
     form_class = AlarmForm
+    success_url = '/alarms/alarm'
     def get_context_data(self, **kwargs):
         ctx = super(AlarmCreate, self).get_context_data(**kwargs)
         ctx['title'] = 'Add new alarm'
@@ -55,11 +57,13 @@ class AlarmCreate(LoginRequiredMixin,CreateView):
         form.instance.creator = self.request.user
         return super(AlarmCreate, self).form_valid(form)
 
-class AlarmUpdate(LoginRequiredMixin,UpdateView):
+class AlarmUpdate(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     login_url = '/account/login'
     redirect_field_name = 'redirect_to'
     model = Alarm
+    permission_required = 'alarm.edit_alarm'
     form_class = AlarmForm
+    success_url = '/alarms/alarm'
     def get_context_data(self, **kwargs):
         ctx = super(AlarmUpdate, self).get_context_data(**kwargs)
         ctx['title'] = 'Update alarm'
@@ -68,11 +72,12 @@ class AlarmUpdate(LoginRequiredMixin,UpdateView):
         form.instance.creator = self.request.user
         return super(AlarmUpdate, self).form_valid(form)
 
-class AlarmDelete(LoginRequiredMixin,DeleteView):
+class AlarmDelete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     login_url = '/account/login'
     redirect_field_name = 'redirect_to'
     model = Alarm
-    success_url = '/'
+    permission_required = 'alarm.edit_alarm'
+    success_url = '/alarms/alarm'
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
 
@@ -81,7 +86,7 @@ class ProfileUpdate(LoginRequiredMixin,UpdateView):
     redirect_field_name = 'redirect_to'
     model = User
     form_class = ProfileForm
-    # fields = ['first_name','last_name','username','email']
+    success_url = '/alarms/alarm'
     def get_context_data(self, **kwargs):
         ctx = super(ProfileUpdate, self).get_context_data(**kwargs)
         ctx['title'] = 'Update Profile'
