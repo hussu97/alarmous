@@ -5,10 +5,10 @@ import datetime
 # Create your models here.
 class Alarm(models.Model):
     """Model representing an alarm"""
-    title = models.CharField(max_length=200)
-    creator = models.ForeignKey(User, on_delete=models.CASCADE)
-    sound = models.ForeignKey('Sound', on_delete=models.CASCADE, default=1)
-    time = models.DateTimeField()
+    title = models.CharField(max_length=200, default = 'Alarm', help_text = 'Enter a nice name for the alarm')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    sound = models.ForeignKey('Sound', on_delete=models.CASCADE, default=1, help_text = 'Choose the sound for your alarm')
+    time = models.DateTimeField(help_text = 'Choose a date and time for your alarm that is BEFORE the current time')
 
     class Meta:
         ordering = ['time']
@@ -18,7 +18,6 @@ class Alarm(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a detail record for this alarm."""
         return '/'
-
 
 class Sound(models.Model):
     name = models.CharField(max_length = 200)

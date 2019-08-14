@@ -2,6 +2,7 @@ const currentTimeId = "time";
 const alarmTimeClass = "alarm-time";
 const alarmRelativeToCurrentTimeClass = "alarm-relative";
 const alarmWarningClass = "alarm-warning";
+const alarmSoundClass = "alarm-sound";
 const alarm = new Audio();
 
 refreshTimes = () => {
@@ -11,18 +12,19 @@ refreshTimes = () => {
     var alarmTimes = document.getElementsByClassName(alarmTimeClass);
     var relativeToCurrentTimeAlarmTimes = document.getElementsByClassName(alarmRelativeToCurrentTimeClass);
     var alarmWarnings = document.getElementsByClassName(alarmWarningClass);
+    var alarmSounds = document.getElementsByClassName(alarmSoundClass);
     for (let i = 0; i < alarmTimes.length; i++) {
         addRelativeTime(formatDateDisplay(alarmTimes[i].textContent), relativeToCurrentTimeAlarmTimes[i]);
         addWarning(formatDateDisplay(alarmTimes[i].textContent), alarmWarnings[i]);
-        checkAlarm(formatDateDisplay(alarmTimes[i].textContent));
+        checkAlarm(formatDateDisplay(alarmTimes[i].textContent), alarmSounds[i].textContent, i);
     }
 
 }
 
-checkAlarm = (alarmTime) => {
+checkAlarm = (alarmTime, sound, popupIndex) => {
     if (moment(alarmTime).isSame(moment(), 'second')) {
-        alert('alarm time!');
-        //playAlarm(sound);
+        playAlarm(sound);
+        displayPopup(popupIndex);
     }
 }
 
@@ -41,7 +43,11 @@ stopAlarm = () => {
     alarm.currentTime = 0;
     alarm.src = '';
 }
-
+displayPopup = (popupIndex) => {
+    console.log(`hey ${popupIndex}`);
+    $(`#modal-alarm-${popupIndex}`).modal('show');
+    $(`#modal-alarm-${popupIndex}`).on('hidden.bs.modal', (e) => stopAlarm());
+}
 setCurrentTime = (placeholder) => placeholder.innerHTML = moment().format("HH:mm:ss");
 formatDateDisplay = (dateDisplay) => dateDisplay.replace(/\./g, '');
 

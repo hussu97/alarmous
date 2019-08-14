@@ -5,8 +5,9 @@ from django.urls import reverse_lazy
 from django import forms
 from alarms_project.models import Alarm
 from django.contrib.auth.models import User
-from alarms_project.forms import AlarmForm, SignUpForm
+from alarms_project.forms import AlarmForm, SignUpForm, ProfileForm
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.models import Group
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -19,12 +20,16 @@ def signup(request):
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
+            my_group = Group.objects.get(name='AlarmGroup') 
+            my_group.user_set.add(user)
             login(request, user)
             return redirect('/')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
 
+class LandingPageView(TemplateView):
+    template_name = 'lannding.html'
 
 class HomePageView(LoginRequiredMixin,ListView):
     login_url = '/account/login'
@@ -35,10 +40,7 @@ class HomePageView(LoginRequiredMixin,ListView):
     template_name = 'home.html'
 
     def get_queryset(self):
-        return Alarm.objects.filter(creator=self.request.user)
-
-class AboutPageView(LoginRequiredMixin,TemplateView):
-    template_name = "about.html"
+        return Alarm.objects.filter(creator = self.request.user)
 
 class AlarmCreate(LoginRequiredMixin,CreateView):
     login_url = '/account/login'
@@ -78,8 +80,11 @@ class ProfileUpdate(LoginRequiredMixin,UpdateView):
     login_url = '/account/login'
     redirect_field_name = 'redirect_to'
     model = User
-    fields = ['first_name','last_name','username','email']
+    form_class = ProfileForm
+    # fields = ['first_name','last_name','username','email']
     def get_context_data(self, **kwargs):
         ctx = super(ProfileUpdate, self).get_context_data(**kwargs)
         ctx['title'] = 'Update Profile'
         return ctx
+    def get_object(self):
+        return self.request.user

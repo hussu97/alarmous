@@ -1,8 +1,4 @@
-{% extends "registration/base.html" %} {% block content %} {% if next %} {% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed, please login with an account that has access.</p>
-{% else %}
-<p>Please login to see this page.</p>
-{% endif %} {% endif %}
+{% extends "registration/base.html" %}
 <h2>Log In</h2>
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %} {% load crispy_forms_tags %} {{ form|crispy }}

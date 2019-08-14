@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap4',
     'bootstrap_datepicker_plus',
+    'rules',
 ]
 
 MIDDLEWARE = [
@@ -62,7 +63,14 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'rules.permissions.ObjectPermissionBackend',
+)
+
 ROOT_URLCONF = 'alarms.urls'
+
+# PERMISSION_CHECK_TEMPLATES_OPTIONS_BUILTINS = False
 
 TEMPLATES = [
     {
@@ -145,6 +153,10 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'alarms_project','static'),
+    os.path.join(BASE_DIR, 'alarms_project','media'),
+)
 STATIC_ROOT = os.path.join(BASE_DIR,'static')
 STATIC_URL = '/static/'
 

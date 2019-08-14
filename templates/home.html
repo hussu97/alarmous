@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <center>
-    <p class="pt-5">Welcome to Alarmous {{user.first_name}} {{user.last_name}}, Your one stop shop to all things alarms related</p>
+    <p class="pt-5">Welcome to Alarmous <b>{{user.first_name}} {{user.last_name}}</b>, Your one stop shop to all things alarms related</p>
     <h1>Current time is</h1>
     <h1 id="time"></h1>
 </center>
@@ -13,15 +13,33 @@
             <div class="card-body">
                 <h4 class="card-title">{{alarm.title}}</h4>
                 <h5 class="card-subtitle alarm-time">{{alarm.time}}</h5>
-                <audio src={{alarm.sound.audio.url}}></audio>
-                <p>{{alarm.sound.audio.url}}</p>
+                <p style="display: none;" class="alarm-sound">{{alarm.sound.audio.url}}</p>
                 <p class="card-text alarm-relative"></p>
                 <div class="row">
                     <div class="col-6">
                         <a href="{% url 'alarm_update' pk=alarm.id %}" class="btn btn-success">Edit</a>
                     </div>
                     <div class="col-6">
-                        <a href="{% url 'alarm_delete' pk=alarm.id %}" class="btn btn-danger">Dismiss</a>
+                        <a href="{% url 'alarm_delete' pk=alarm.id %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="modal-alarm-{{forloop.counter0}}" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title alarm-title">{{alarm.title}}</h5>
+                        <button type="button" class="close" data-dismiss="modal">
+                            <span>&times;</span>
+                          </button>
+                    </div>
+                    <div class="modal-body alarm-text">
+                        <p>Your alarm is ringing. Click on dismiss to cancel the alarm, or delete to dismiss and remove the alarm</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+                        <a href="{% url 'alarm_delete' pk=alarm.id %}" class="btn btn-danger">Delete</a>
                     </div>
                 </div>
             </div>
@@ -53,4 +71,7 @@
         </li>
     </ul>
     {% endif %}
-</center>{% endblock %}
+</center>
+{% load static %}
+<script type="text/javascript" src="{% static 'alarms/js/time.js' %}"></script>
+{% endblock %}
