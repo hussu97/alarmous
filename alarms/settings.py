@@ -145,7 +145,7 @@ ABSOLUTE_URL_OVERRIDES = {
 }
 
 # Redirect to home URL after login/logout (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/alarms/alarm'
+LOGIN_REDIRECT_URL = '/alarms/alarms'
 LOGOUT_REDIRECT_URL = '/account/login'
 
 # for using bootstrap forms in django
