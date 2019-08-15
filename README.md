@@ -2,7 +2,7 @@
 
 **A website to satisfy all your alarm related needs**
 
-[![Website](/screenshots/home.jpg)](http://devl.xfstzsazrv.us-east-1.elasticbeanstalk.com/)
+[![Website](/screenshots/website.gif)](http://devl.xfstzsazrv.us-east-1.elasticbeanstalk.com/)
 **Project for learning Django framework**
 **Project Duration - August 2019**
 ***
@@ -52,8 +52,9 @@ $ python3 manage.py runserver #Linux
 * Edit the alarm time, or delete it
 
 ## Additional Screenshots
-###Landing
+###Web Screens
 ![Landing](/screenshots/landing.jpg)
+![Home](/screenshots/home.jpg)
 ![Popup](/screenshots/popup.jpg)
 ***
 ### Mobile Screens
