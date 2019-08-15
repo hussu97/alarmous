@@ -32,9 +32,9 @@ except KeyError:
 DEBUG = True
 
 try:
-    ALLOWED_HOSTS = [os.environ['host_domain'],'127.0.0.1']
+    ALLOWED_HOSTS = [os.environ['host_domain'],'127.0.0.1','localhost']
 except KeyError:
-    ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition

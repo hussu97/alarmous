@@ -24,7 +24,7 @@ def signup(request):
             my_group = Group.objects.get(name='AlarmGroup') 
             my_group.user_set.add(user)
             login(request, user)
-            return redirect('/alarms/alarm')
+            return redirect('/alarms/alarms')
     else:
         form = SignUpForm()
     return render(request, 'registration/signup.html', {'form': form})
@@ -48,7 +48,7 @@ class AlarmCreate(LoginRequiredMixin,CreateView):
     redirect_field_name = 'redirect_to'
     model = Alarm
     form_class = AlarmForm
-    success_url = '/alarms/alarm'
+    success_url = '/alarms/alarms'
     def get_context_data(self, **kwargs):
         ctx = super(AlarmCreate, self).get_context_data(**kwargs)
         ctx['title'] = 'Add new alarm'
@@ -63,7 +63,7 @@ class AlarmUpdate(LoginRequiredMixin,PermissionRequiredMixin,UpdateView):
     model = Alarm
     permission_required = 'alarm.edit_alarm'
     form_class = AlarmForm
-    success_url = '/alarms/alarm'
+    success_url = '/alarms/alarms'
     def get_context_data(self, **kwargs):
         ctx = super(AlarmUpdate, self).get_context_data(**kwargs)
         ctx['title'] = 'Update alarm'
@@ -77,7 +77,7 @@ class AlarmDelete(LoginRequiredMixin,PermissionRequiredMixin,DeleteView):
     redirect_field_name = 'redirect_to'
     model = Alarm
     permission_required = 'alarm.edit_alarm'
-    success_url = '/alarms/alarm'
+    success_url = '/alarms/alarms'
     def get(self, *args, **kwargs):
         return self.post(*args, **kwargs)
 
@@ -86,7 +86,7 @@ class ProfileUpdate(LoginRequiredMixin,UpdateView):
     redirect_field_name = 'redirect_to'
     model = User
     form_class = ProfileForm
-    success_url = '/alarms/alarm'
+    success_url = '/alarms/alarms'
     def get_context_data(self, **kwargs):
         ctx = super(ProfileUpdate, self).get_context_data(**kwargs)
         ctx['title'] = 'Update Profile'

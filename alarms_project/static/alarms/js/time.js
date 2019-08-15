@@ -49,6 +49,14 @@ displayPopup = (popupIndex) => {
     $(`#modal-alarm-${popupIndex}`).on('hidden.bs.modal', (e) => stopAlarm());
 }
 setCurrentTime = (placeholder) => placeholder.innerHTML = moment().format("HH:mm:ss");
-formatDateDisplay = (dateDisplay) => dateDisplay.replace(/\./g, '');
+formatDateDisplay = (dateDisplay) => {
+    dateDisplay = dateDisplay.replace(/\./g, '');
+    if (!dateDisplay.includes(":")) {
+        strList = dateDisplay.split(" ");
+        strList[strList.length - 2] += ":00";
+        dateDisplay = strList.join(" ");
+    }
+    return dateDisplay;
+}
 
 setInterval(refreshTimes, 1000);
