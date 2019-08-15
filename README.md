@@ -3,8 +3,8 @@
 **A website to satisfy all your alarm related needs**
 
 [![Website](/screenshots/home.jpg)](http://devl.xfstzsazrv.us-east-1.elasticbeanstalk.com/)
-**Project for - CMP404 - Cloud Computing**
-**Project Duration - February-May 2019**
+**Project for learning Django framework**
+**Project Duration - August 2019**
 ***
 Alarmous is a simple website where users can create alarms, and have it ring on the website when the alarm time is up.
 
